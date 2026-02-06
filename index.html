@@ -59,17 +59,21 @@
 
   let scale = 1;
 
-  noBtn.addEventListener("mouseover", () => {
-    // move NO
+  function moveNoAndGrowYes() {
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // grow YES
-    scale += 0.15;
+    scale += 0.2;
     yesBtn.style.transform = scale(${scale});
-  });
+  }
+
+  // For phones
+  noBtn.addEventListener("touchstart", moveNoAndGrowYes);
+
+  // For laptops / desktop
+  noBtn.addEventListener("mouseenter", moveNoAndGrowYes);
 
   yesBtn.addEventListener("click", () => {
     yesBtn.style.display = "none";
