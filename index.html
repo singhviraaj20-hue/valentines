@@ -1,47 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Valentine</title>
+
   <style>
     body {
+      margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      font-family: Arial;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: Arial, sans-serif;
     }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 360px;
+      position: relative;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 10px;
+    }
+
+    #extraText {
+      min-height: 24px;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .buttons {
+      position: relative;
+      height: 140px;
+    }
+
     button {
-      padding: 20px 40px;
-      font-size: 20px;
-      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.15s;
+      font-size: 18px;
+      padding: 12px 22px;
+    }
+
+    #yes {
+      background: #ff4d6d;
+      color: white;
+      position: relative;
+      z-index: 2;
+    }
+
+    #no {
+      background: #ddd;
+      color: #333;
+      position: absolute;
+      left: 50%;
+      top: 70px;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    #msg {
+      display: none;
+      margin-top: 20px;
+      color: #ff4d6d;
+    }
+
+    img {
+      display: none;
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 12px;
     }
   </style>
 </head>
 
 <body>
-  <h1 id="title">Daisha, will you be my Valentine?</h1>
+  <div class="box">
+    <h1>Daisha, will you be my Valentine?</h1>
+    <p id="extraText"></p>
 
-  <button id="yes">YES</button>
-  <button id="no">NO</button>
+    <div class="buttons">
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
 
-  <p id="text"></p>
+    <h2 id="msg">hah suck it knew you’d say yes 😈</h2>
+    <img src="IMG_2942.gif" id="meme">
+  </div>
 
   <script>
-    alert("JS LOADED");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const extraText = document.getElementById("extraText");
+    const meme = document.getElementById("meme");
+    const msg = document.getElementById("msg");
+    const area = document.querySelector(".buttons");
 
-    const yes = document.getElementById("yes");
-    const no = document.getElementById("no");
-    const text = document.getElementById("text");
+    const lines = [
+      "oh so you hate me",
+      "wow go to your other bf",
+      "lodu ho kya",
+      "KYA HAI",
+      "bye then 🙄",
+      "oh so what you’re saying is you wanna breakup"
+    ];
 
-    yes.onclick = () => {
-      text.innerText = "YES CLICKED";
-    };
+    let textIndex = 0;
+    let yesSize = 18;
+    let padX = 22;
+    let padY = 12;
 
-    no.onclick = () => {
-      text.innerText = "NO CLICKED";
-    };
+    function onNoAttempt() {
+      // move NO within box
+      const maxX = area.clientWidth - 100;
+      const maxY = area.clientHeight - 50;
+
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+      noBtn.style.transform = "none";
+
+      // cycle text
+      extraText.innerText = lines[textIndex];
+      textIndex = (textIndex + 1) % lines.length;
+
+      // grow YES
+      yesSize += 4;
+      padX += 6;
+      padY += 4;
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.padding = ${padY}px ${padX}px;
+    }
+
+    noBtn.addEventListener("mouseenter", onNoAttempt);
+    noBtn.addEventListener("touchstart", onNoAttempt);
+
+    yesBtn.addEventListener("click", () => {
+      document.querySelector(".buttons").style.display = "none";
+      extraText.style.display = "none";
+      msg.style.display = "block";
+      meme.style.display = "block";
+    });
   </script>
 </body>
 </html>
