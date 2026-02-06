@@ -41,6 +41,7 @@
 <body>
   <div class="box">
     <h1>Do you want to be my Valentine?</h1>
+    <p id="extraText" style="font-size:18px; margin-bottom:20px;"></p>
     <button id="yes">Yes</button>
     <button id="no">No</button>
 
@@ -56,28 +57,41 @@
   const yesBtn = document.getElementById("yes");
   const meme = document.getElementById("meme");
   const msg = document.getElementById("msg");
+  const extraText = document.getElementById("extraText");
 
-  let scale = 1;
+  // PUT HER LINES HERE
+  const lines = [
+    "oh so you hate me?",
+    "wow okay go kys",
+    "niceone, might asw go to your other bf",
+    "lodu ho kya",
+    "youre an acc bitch 👍"
+  ];
 
-  function moveNoAndGrowYes() {
+  let index = 0;
+
+  function onNoAttempt() {
+    // move NO button
     const x = Math.random() * (window.innerWidth - 120);
     const y = Math.random() * (window.innerHeight - 60);
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    scale += 0.2;
-    yesBtn.style.transform = scale(${scale});
+    // change text
+    extraText.innerText = lines[index];
+    index = (index + 1) % lines.length;
   }
 
-  // For phones
-  noBtn.addEventListener("touchstart", moveNoAndGrowYes);
+  // iPhone
+  noBtn.addEventListener("touchstart", onNoAttempt);
 
-  // For laptops / desktop
-  noBtn.addEventListener("mouseenter", moveNoAndGrowYes);
+  // Desktop
+  noBtn.addEventListener("mouseenter", onNoAttempt);
 
   yesBtn.addEventListener("click", () => {
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
+    extraText.style.display = "none";
     msg.style.display = "block";
     meme.style.display = "block";
   });
