@@ -90,57 +90,56 @@
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const extraText = document.getElementById("extraText");
-    const meme = document.getElementById("meme");
-    const msg = document.getElementById("msg");
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const extraText = document.getElementById("extraText");
+  const meme = document.getElementById("meme");
+  const msg = document.getElementById("msg");
 
-    const lines = [
-      "oh so you hate me",
-      "wow go to your other bf",
-      "lodu ho kya",
-      "KYA HAI",
-      "bye then 🙄",
-      "oh so what you’re saying is you wanna breakup"
-    ];
+  const lines = [
+    "oh so you hate me",
+    "wow go to your other bf",
+    "lodu ho kya",
+    "KYA HAI",
+    "bye then 🙄",
+    "oh so what you’re saying is you wanna breakup"
+  ];
 
-    let textIndex = 0;
-    let yesFont = 18;
-    let yesPadX = 22;
-    let yesPadY = 12;
+  let i = 0;
+  let yesFontSize = 18;
+  let yesPaddingX = 22;
+  let yesPaddingY = 12;
 
-    function onNoAttempt() {
-      // move NO
-      const x = Math.random() * (window.innerWidth - 140);
-      const y = Math.random() * (window.innerHeight - 80);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+  function noAttempt() {
+    // move NO
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-      // change text
-      extraText.innerText = lines[textIndex];
-      textIndex = (textIndex + 1) % lines.length;
+    // cycle text
+    extraText.innerText = lines[i];
+    i = (i + 1) % lines.length;
 
-      // grow YES (very visible)
-      yesFont += 4;
-      yesPadX += 6;
-      yesPadY += 4;
-      yesBtn.style.fontSize = yesFont + "px";
-      yesBtn.style.padding = ${yesPadY}px ${yesPadX}px;
-    }
+    // grow YES (very visible)
+    yesFontSize += 4;
+    yesPaddingX += 6;
+    yesPaddingY += 4;
 
-    // desktop
-    noBtn.addEventListener("mouseenter", onNoAttempt);
-    // mobile
-    noBtn.addEventListener("touchstart", onNoAttempt);
+    yesBtn.style.fontSize = yesFontSize + "px";
+    yesBtn.style.padding = ${yesPaddingY}px ${yesPaddingX}px;
+  }
 
-    yesBtn.addEventListener("click", () => {
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-      extraText.style.display = "none";
-      msg.style.display = "block";
-      meme.style.display = "block";
-    });
-  </script>
+  noBtn.addEventListener("mouseenter", noAttempt);
+  noBtn.addEventListener("touchstart", noAttempt);
+
+  yesBtn.addEventListener("click", () => {
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+    extraText.style.display = "none";
+    msg.style.display = "block";
+    meme.style.display = "block";
+  });
+</script>
 </body>
 </html>
