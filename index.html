@@ -52,24 +52,31 @@
   </div>
 
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const meme = document.getElementById("meme");
-    const msg = document.getElementById("msg");
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const meme = document.getElementById("meme");
+  const msg = document.getElementById("msg");
 
-    noBtn.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
-    });
+  let scale = 1;
 
-    yesBtn.addEventListener("click", () => {
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-      msg.style.display = "block";
-      meme.style.display = "block";
-    });
-  </script>
+  noBtn.addEventListener("mouseover", () => {
+    // move NO
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    // grow YES
+    scale += 0.15;
+    yesBtn.style.transform = scale(${scale});
+  });
+
+  yesBtn.addEventListener("click", () => {
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+    msg.style.display = "block";
+    meme.style.display = "block";
+  });
+</script>
 </body>
 </html>
