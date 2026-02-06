@@ -85,44 +85,57 @@
     <h2 id="msg">hah suck it knew you’d say yes 😈</h2>
     <img src="IMG_2942.gif" id="meme">
   </div>
-
   <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const extraText = document.getElementById("extraText");
-    const meme = document.getElementById("meme");
-    const msg = document.getElementById("msg");
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+  const extraText = document.getElementById("extraText");
+  const meme = document.getElementById("meme");
+  const msg = document.getElementById("msg");
 
-    const lines = [
-      "oh so you hate me?",
-    "wow okay go kys",
-    "niceone, might asw go to your other bf",
+  const lines = [
+    "oh so you hate me",
+    "wow go to your other bf",
     "lodu ho kya",
-    "youre an acc bitch 👍"
-    ];
+    "KYA HAI",
+    "bye then 🙄",
+    "oh so what you’re saying is you wanna breakup"
+  ];
 
-    let i = 0;
+  let i = 0;
+  let yesFontSize = 18;
+  let yesPaddingX = 22;
+  let yesPaddingY = 12;
 
-    function noAttempt() {
-      const x = Math.random() * (window.innerWidth - 120);
-      const y = Math.random() * (window.innerHeight - 60);
-      noBtn.style.left = x + "px";
-      noBtn.style.top = y + "px";
+  function noAttempt() {
+    // move NO
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 
-      extraText.innerText = lines[i];
-      i = (i + 1) % lines.length;
-    }
+    // cycle text
+    extraText.innerText = lines[i];
+    i = (i + 1) % lines.length;
 
-    noBtn.addEventListener("touchstart", noAttempt);
-    noBtn.addEventListener("mouseenter", noAttempt);
+    // grow YES (very visible)
+    yesFontSize += 4;
+    yesPaddingX += 6;
+    yesPaddingY += 4;
 
-    yesBtn.addEventListener("click", () => {
-      yesBtn.style.display = "none";
-      noBtn.style.display = "none";
-      extraText.style.display = "none";
-      msg.style.display = "block";
-      meme.style.display = "block";
-    });
-  </script>
+    yesBtn.style.fontSize = yesFontSize + "px";
+    yesBtn.style.padding = ${yesPaddingY}px ${yesPaddingX}px;
+  }
+
+  noBtn.addEventListener("mouseenter", noAttempt);
+  noBtn.addEventListener("touchstart", noAttempt);
+
+  yesBtn.addEventListener("click", () => {
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+    extraText.style.display = "none";
+    msg.style.display = "block";
+    meme.style.display = "block";
+  });
+</script>
 </body>
 </html>
